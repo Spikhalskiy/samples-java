@@ -21,9 +21,12 @@ package io.temporal.samples.moneytransfer;
 
 import static io.temporal.samples.moneytransfer.AccountActivityWorker.TASK_QUEUE;
 
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowOptions;
 import io.temporal.serviceclient.WorkflowServiceStubs;
+import io.temporal.serviceclient.WorkflowServiceStubsOptions;
 import java.util.Random;
 import java.util.UUID;
 
@@ -40,7 +43,13 @@ public class TransferRequester {
       reference = args[0];
       amountCents = Integer.parseInt(args[1]);
     }
-    WorkflowServiceStubs service = WorkflowServiceStubs.newInstance();
+
+    ManagedChannel channel =
+        ManagedChannelBuilder.forAddress("127.0.0.1", 7233).usePlaintext().build();
+    WorkflowServiceStubs service =
+        WorkflowServiceStubs.newInstance(
+            WorkflowServiceStubsOptions.newBuilder().setChannel(channel).build());
+
     // client that can be used to start and signal workflows
     WorkflowClient workflowClient = WorkflowClient.newInstance(service);
 
