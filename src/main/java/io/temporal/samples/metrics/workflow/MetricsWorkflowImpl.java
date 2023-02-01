@@ -33,6 +33,7 @@ public class MetricsWorkflowImpl implements MetricsWorkflow {
 
   @Override
   public String exec(String input) {
+    Workflow.newTimer(Duration.ofSeconds(30)).thenApply(unused -> {Workflow.getMetricsScope().counter("counterName").inc(1); return null;});
     String result = activities.performA(input);
     Workflow.sleep(Duration.ofSeconds(5));
     result += activities.performB(input);
