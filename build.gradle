@@ -21,16 +21,18 @@ repositories {
 }
 
 ext {
+    micrometerVersion = '1.9.9'
+    guavaVersion = '31.1-jre'
+
     otelVersion = '1.23.1'
     otelVersionAlpha = "${otelVersion}-alpha"
-    javaSDKVersion = '1.18.1'
+    javaSDKVersion = '1.19.0-SNAPSHOT'
 }
 
 dependencies {
     // Temporal SDK
-    implementation "io.temporal:temporal-sdk:$javaSDKVersion"
+    implementation "io.temporal:temporal-shaded:$javaSDKVersion"
     implementation "io.temporal:temporal-opentracing:$javaSDKVersion"
-    testImplementation("io.temporal:temporal-testing:$javaSDKVersion")
 
     // Needed for SDK related functionality
     implementation(platform("com.fasterxml.jackson:jackson-bom:2.14.2"))
@@ -63,6 +65,10 @@ dependencies {
 
     // we don't update it to 2.1.0 because 2.1.0 requires Java 11
     implementation 'com.codingrodent:jackson-json-crypto:1.1.0'
+
+    // Additional dependencies because they don't come as transitive from the shaded artifact anymore
+    implementation(platform("io.micrometer:micrometer-bom:$micrometerVersion"))
+    implementation "com.google.guava:guava:$guavaVersion"
 
     testImplementation "junit:junit:4.13.2"
     testImplementation "org.mockito:mockito-core:5.1.1"

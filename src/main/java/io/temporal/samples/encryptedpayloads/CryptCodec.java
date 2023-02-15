@@ -19,12 +19,12 @@
 
 package io.temporal.samples.encryptedpayloads;
 
-import com.google.protobuf.ByteString;
 import io.temporal.api.common.v1.Payload;
 import io.temporal.common.converter.DataConverterException;
 import io.temporal.common.converter.EncodingKeys;
 import io.temporal.payload.codec.PayloadCodec;
 import io.temporal.payload.codec.PayloadCodecException;
+import io.temporal.shaded.com.google.protobuf.ByteString;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

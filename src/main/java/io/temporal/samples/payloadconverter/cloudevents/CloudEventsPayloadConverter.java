@@ -19,7 +19,6 @@
 
 package io.temporal.samples.payloadconverter.cloudevents;
 
-import com.google.protobuf.ByteString;
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.format.EventFormat;
 import io.cloudevents.core.format.EventSerializationException;
@@ -28,6 +27,7 @@ import io.cloudevents.jackson.JsonFormat;
 import io.temporal.api.common.v1.Payload;
 import io.temporal.common.converter.DataConverterException;
 import io.temporal.common.converter.PayloadConverter;
+import io.temporal.shaded.com.google.protobuf.ByteString;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
